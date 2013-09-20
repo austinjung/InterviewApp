@@ -1,0 +1,51 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+    {% if ras_list %}
+    <table style="width: 100%;border:1px solid #e1e1e1;">
+    <thead>
+    <tr>
+    <th scope="col"  class="sortable">
+       <div class="text">ID</div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text">RAS Model</div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text">RAS Name</div>
+       <div class="clear"></div>
+    </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for ras in ras_list %}
+        <tr class="{% cycle '' 'alt' as rowcolors %}" >
+        <td>
+            <div class="text"><a href="{% url 'SampleISP:manage_ras' ras.id %}">{{ ras.id }}</a></div>
+            <div class="clear"></div>
+        </td>
+        <td>
+            {{ ras.ras_model }}
+        </td>
+        <td>
+            {{ ras.ras_name }}
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+        <p>No routers are available.</p>
+    {% endif %}
+{% endblock %}

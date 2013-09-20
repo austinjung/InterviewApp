@@ -1,0 +1,57 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Customer' %} - {{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Administrator Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:index' %}">{% trans 'User Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:customer_list' %}">{% trans 'Customer List' %}</a>
+    &nbsp:&nbsp
+    {{ title }}
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<fieldset class="module aligned" style="width:30%;">
+    <h2 style="font-size:1.4em;">Customer Information</h2>
+    <div style="padding-left:10px;padding-top:5px;" class="field-box">
+        <label for="id_customerID">CustomerID:</label>
+        <input style="width:200px;" name="customer_id" value="{{ customer.customerID }}" class="vTextField" maxlength="50" type="text" id="Text1" readonly="readonly" />
+    </div>
+    <div style="padding-left:25px;padding-top:5px;" class="field-box">
+        <label for="id_full_name">Full name:</label>
+        <input style="width:200px;" name="full_name" value="{{ customer.full_name }}" class="vTextField" maxlength="50" type="text" id="id_full_name" readonly="readonly" />
+    </div>
+    <div style="padding-left:52px;padding-top:5px;" class="field-box">
+        <label for="id_email">Email:</label>
+        <input style="width:200px;" name="email" value="{{ customer.email }}" class="vTextField" maxlength="75" type="text" id="id_email" readonly="readonly" />
+    </div>
+    <div style="padding-left:46px;padding-top:5px;" class="field-box">
+        <label for="id_street">Street:</label>
+        <input style="width:200px;" name="street" value="{{ customer.street }}" class="vTextField" maxlength="50" type="text" id="id_street" />
+    </div>
+    <div style="padding-left:61px;padding-top:5px;" class="field-box">
+        <label for="id_city">City:</label>
+        <input style="width:200px;" name="city" value="{{ customer.city }}" class="vTextField" maxlength="50" type="text" id="id_city" />
+    </div>
+    <div style="padding-left:31px;padding-top:5px;" class="field-box">
+        <label for="id_province" class="required inline">Province:</label>
+        <input style="width:200px;" name="province" value="{{ customer.province }}" class="vTextField" maxlength="50" type="text" id="id_province" />
+    </div>
+    <div style="padding-left:15px;padding-top:5px;padding-bottom:5px;" class="field-box">
+        <label for="id_subscribed_date" class="required inline">Subscribed:</label>
+        <input style="width:200px;" name="subscribed_date" value="{{ customer.subscribed_date }}" class="vTextField" maxlength="50" type="text" id="id_subscribed_date" />
+    </div>
+</fieldset>
+{% endblock %}

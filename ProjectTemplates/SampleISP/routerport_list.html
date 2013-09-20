@@ -1,0 +1,73 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+    {% if routerport_list %}
+        <table style="width: 100%;border:1px solid #e1e1e1;">
+        <thead>
+        <tr>
+        <th scope="col"  class="sortable">
+           <div class="text">id</div>
+           <div class="clear"></div>
+        </th>
+        <th scope="col"  class="sortable">
+           <div class="text">Port Name</div>
+           <div class="clear"></div>
+        </th>
+        <th scope="col"  class="sortable">
+           <div class="text">Router</div>
+           <div class="clear"></div>
+        </th>
+        <th scope="col"  class="sortable">
+           <div class="text">Switch</div>
+           <div class="clear"></div>
+        </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for routerport in routerport_list %}
+            <tr class="{% cycle '' 'alt' as rowcolors %}" >
+            <td>
+                <div class="text"><a href="{% url 'SampleISP:routerport_detail' routerport.id %}">{{ routerport.id }}</a></div>
+                <div class="clear"></div>
+            </td>
+            <td>
+                {{ routerport.port_name }}
+            </td>
+            <td>
+                {{ routerport.router.router_name }}
+            </td>
+            <td>
+                {{ routerport.switch.switch_name }}
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% if is_paginated %}
+            <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'SampleISP:routerport_list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'SampleISP:routerport_list' %}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+            </div>
+        {% endif %}
+    {% else %}
+        <p>No routers are available.</p>
+    {% endif %}
+{% endblock %}

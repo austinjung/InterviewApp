@@ -1,0 +1,36 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Router' %} - {{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Administrator Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:index' %}">{% trans 'User Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:router_list' %}">{% trans 'Router List' %}</a>
+    &nbsp:&nbsp
+    {{ title }}
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="module aligned" style="width:30%;">
+    <h2 style="font-size:1.4em;">Router Information</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        <table width="100%">
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Update" />
+    </form>
+</div>
+{% endblock %}

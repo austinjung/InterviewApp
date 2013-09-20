@@ -1,0 +1,22 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Table List' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+    {% if table_list %}
+        <ul>
+        {% for table in table_list %}
+            <li><a href="{% url 'SampleISP:index' %}{{ table.url }}">{{ table.table_name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tables are available.</p>
+    {% endif %}
+{% endblock %}

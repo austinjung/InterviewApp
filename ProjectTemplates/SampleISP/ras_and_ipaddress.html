@@ -1,0 +1,46 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Remote Access Server' %} - {{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Administrator Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:index' %}">{% trans 'User Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:ras_list' %}">{% trans 'RAS List' %}</a>
+    &nbsp:&nbsp
+    {{ title }}
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<fieldset class="module aligned" style="width:30%;">
+    <h2 style="font-size:1.4em;">RAS Information</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        <legend>Remote Access Server</legend>
+        <table width="100%">
+            {{ ras_form }}
+        </table>
+{#        <input name="ras_form" type="submit" value="Update ras" />#}
+{#    </form>#}
+{#            <form method="post" action="">#}
+{#                {% csrf_token %}#}
+                <legend>IP Address</legend>
+                <table width="100%">
+                    {{ ipaddress_formset }}
+                </table>
+{#                <input name="ipaddress_formset" type="submit" value="Update ip addresses" />#}
+                <input type="submit" value="Update" />
+            </form>
+</fieldset>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+    {% if router_list %}
+    <table style="width: 100%;border:1px solid #e1e1e1;">
+    <thead>
+    <tr>
+    <th scope="col"  class="sortable">
+       <div class="text">RouterID</div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text">Router Model</div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text">Router Name</div>
+       <div class="clear"></div>
+    </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for router in router_list %}
+        <tr class="{% cycle '' 'alt' as rowcolors %}" >
+        <td>
+            <div class="text"><a href="{% url 'SampleISP:router_detail' router.id %}">{{ router.id }}</a></div>
+            <div class="clear"></div>
+        </td>
+        <td>
+            {{ router.router_model }}
+        </td>
+        <td>
+            {{ router.router_name }}
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+        <p>No routers are available.</p>
+    {% endif %}
+{% endblock %}

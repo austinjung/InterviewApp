@@ -1,0 +1,55 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Router Port' %} - {{ title }}{% endblock %}
+
+{% block extrastyle %}
+    {{ form.media.css }}
+{% endblock %}
+{% block extratailscript %}
+    {{ form.media.js }}
+<script type="text/javascript" src="{{ STATIC_URL }}js/SampleISP/routerport_detail.js"></script>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Administrator Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:index' %}">{% trans 'User Home' %}</a>
+    &nbsp:&nbsp
+    <a href="{% url 'SampleISP:routerport_list' %}">{% trans 'Router Port List' %}</a>
+    &nbsp:&nbsp
+    {{ title }}
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="module aligned" style="width:30%;">
+    <h2 style="font-size:1.4em;">Router Port Information</h2>
+    <form id="routerport-update" method="post" action="">
+        {% csrf_token %}
+        <table width="100%">
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Update" />
+    </form>
+</div>
+
+<div id="dialog-message" title="Message Title">
+  <p>
+    <span id="check-circle" class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0; visibility: hidden"></span>
+    <div id="message-header"></div>
+  </p>
+  <p>
+    <div id="message-detail"></div>
+  </p>
+</div>
+
+{% endblock %}

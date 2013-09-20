@@ -1,0 +1,86 @@
+{% extends "SampleISP/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Kerkhofftech Interview App : Sample ISP' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+    {% if customer_list %}
+    <table style="width: 100%;border:1px solid #e1e1e1;">
+    <thead>
+    <tr>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=customerID&po={{ order_column }}&asc={{ ascending }}">CustomerID</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=first_name&po={{ order_column }}&asc={{ ascending }}">First name</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=last_name&po={{ order_column }}&asc={{ ascending }}">Last name</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=email&po={{ order_column }}&asc={{ ascending }}">Email</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=street&po={{ order_column }}&asc={{ ascending }}">Street</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=city&po={{ order_column }}&asc={{ ascending }}">City</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=province&po={{ order_column }}&asc={{ ascending }}">Province</a></div>
+       <div class="clear"></div>
+    </th>
+    <th scope="col"  class="sortable">
+       <div class="text"><a href="?o=subscribed_date&po={{ order_column }}&asc={{ ascending }}">Date subscribed</a></div>
+       <div class="clear"></div>
+    </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for customer in customer_list %}
+        <tr class="{% cycle '' 'alt' as rowcolors %}" >
+        <td>
+            <div class="text"><a href="{% url 'SampleISP:customer_detail' customer.id %}">{{ customer.customerID }}</a></div>
+            <div class="clear"></div>
+        </td>
+        <td>
+            {{ customer.first_name }}
+        </td>
+        <td>
+            {{ customer.last_name }}
+        </td>
+        <td>
+            {{ customer.email }}
+        </td>
+        <td>
+            {{ customer.street }}
+        </td>
+        <td>
+            {{ customer.city }}
+        </td>
+        <td>
+            {{ customer.province }}
+        </td>
+        <td>
+            {{ customer.subscribed_date }}
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+        <p>No customers are available.</p>
+    {% endif %}
+{% endblock %}

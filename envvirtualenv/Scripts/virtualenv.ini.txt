@@ -1,0 +1,5 @@
+
+[virtualenv]
+extra-search-dir =
+    ./Lib/
+    ./Lib/site-packages
