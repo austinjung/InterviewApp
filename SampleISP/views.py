@@ -5,7 +5,7 @@ from SampleISP.forms import RouterForm, RouterPortForm, RouterPortFormSetWithExt
                             RASForm, IPaddressInlineFormSet
 from SampleISP.AjaxableResponseMixin import AjaxableResponseMixin, JSONResponseMixin
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, Http404, HttpResponse
@@ -171,6 +171,7 @@ class RouterPortDetailView(AjaxableResponseMixin, generic.UpdateView):
     def post(self, request, *args, **kwargs):
         return super(RouterPortDetailView, self).post(request, *args, **kwargs)
 
+    @method_decorator(permission_required('SampleISP.change_routerport'))
     def get(self, request, *args, **kwargs):
         return super(RouterPortDetailView, self).get(request, *args, **kwargs)
 
